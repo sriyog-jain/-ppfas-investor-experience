@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 interface Particle {
@@ -11,7 +11,6 @@ interface Particle {
 }
 
 const ParticleBackground: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
   const [particles, setParticles] = React.useState<Particle[]>([])
 
   useEffect(() => {
@@ -31,10 +30,7 @@ const ParticleBackground: React.FC = () => {
   }, [])
 
   return (
-    <div
-      ref={containerRef}
-      className="absolute inset-0 overflow-hidden pointer-events-none"
-    >
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {particles.map((particle) => (
         <motion.div
           key={particle.id}

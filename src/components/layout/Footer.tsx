@@ -1,11 +1,22 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, Phone, MapPin, LucideIcon } from 'lucide-react'
+
+interface FooterLink {
+  title: string
+  links: string[]
+}
+
+interface ContactInfo {
+  icon: LucideIcon
+  label: string
+  value: string
+}
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
 
-  const footerLinks = [
+  const footerLinks: FooterLink[] = [
     {
       title: 'Product',
       links: ['Features', 'Pricing', 'Security', 'Resources'],
@@ -20,7 +31,7 @@ const Footer: React.FC = () => {
     },
   ]
 
-  const contactInfo = [
+  const contactInfo: ContactInfo[] = [
     { icon: Mail, label: 'Email', value: 'contact@ppfas.com' },
     { icon: Phone, label: 'Phone', value: '+91 (800) 102-1234' },
     { icon: MapPin, label: 'Address', value: 'Mumbai, India' },

@@ -1,7 +1,7 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, MotionProps } from 'framer-motion'
 
-interface GlassCardProps {
+interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   className?: string
   variant?: 'default' | 'strong'
@@ -15,6 +15,7 @@ const GlassCard: React.FC<GlassCardProps> = ({
   variant = 'default',
   hoverEffect = true,
   delay = 0,
+  ...rest
 }) => {
   const baseClasses = 'rounded-2xl backdrop-filter backdrop-blur-lg border border-opacity-20'
 
@@ -36,6 +37,7 @@ const GlassCard: React.FC<GlassCardProps> = ({
         ${hoverEffect ? 'cursor-pointer hover-scale' : ''}
         ${className}
       `}
+      {...rest}
     >
       {children}
     </motion.div>

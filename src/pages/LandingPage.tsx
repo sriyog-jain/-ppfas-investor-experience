@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, TrendingUp, Shield, Zap, Users } from 'lucide-react'
+import { motion, Variants } from 'framer-motion'
+import { ArrowRight, TrendingUp, Shield, Zap, Users, LucideIcon } from 'lucide-react'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import Button from '../components/ui/Button'
@@ -9,10 +9,32 @@ import AnimatedCounter from '../components/ui/AnimatedCounter'
 import ParticleBackground from '../components/ui/ParticleBackground'
 import AuroraBackground from '../components/ui/AuroraBackground'
 
+interface Feature {
+  icon: LucideIcon
+  title: string
+  description: string
+}
+
+interface Stat {
+  label: string
+  value: number
+  suffix: string
+}
+
+interface WhyChooseItem {
+  title: string
+  description: string
+}
+
+const CheckIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+)
+
 const LandingPage: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
-  // Mouse parallax effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
@@ -25,7 +47,7 @@ const LandingPage: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  const features = [
+  const features: Feature[] = [
     {
       icon: TrendingUp,
       title: 'Smart Portfolio Growth',
@@ -48,14 +70,14 @@ const LandingPage: React.FC = () => {
     },
   ]
 
-  const stats = [
+  const stats: Stat[] = [
     { label: 'Active Investors', value: 50000, suffix: '+' },
     { label: 'AUM Managed', value: 10000, suffix: 'Cr' },
     { label: 'Funds Available', value: 150, suffix: '+' },
     { label: 'Years Experience', value: 25, suffix: '+' },
   ]
 
-  const whyChooseItems = [
+  const whyChooseItems: WhyChooseItem[] = [
     {
       title: 'Transparent Pricing',
       description: 'No hidden fees. Clear, competitive expense ratios across all funds.',
@@ -82,7 +104,7 @@ const LandingPage: React.FC = () => {
     },
   ]
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -93,7 +115,7 @@ const LandingPage: React.FC = () => {
     },
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -104,13 +126,8 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
-      {/* Animated Aurora Background */}
       <AuroraBackground />
-
-      {/* Navigation */}
       <Navbar />
-
-      {/* Particle Background */}
       <ParticleBackground />
 
       {/* Hero Section */}
@@ -121,7 +138,6 @@ const LandingPage: React.FC = () => {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
-          {/* Floating Label */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -132,7 +148,6 @@ const LandingPage: React.FC = () => {
             <span className="text-emerald-400 text-sm font-semibold">Welcome to Premium Investing</span>
           </motion.div>
 
-          {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -143,7 +158,6 @@ const LandingPage: React.FC = () => {
             <span className="gradient-text">Conviction</span>
           </motion.h1>
 
-          {/* Subheading */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -153,7 +167,6 @@ const LandingPage: React.FC = () => {
             Experience the future of wealth management with PPFAS. Intelligent investing powered by data, guided by expertise, designed for your success.
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -169,7 +182,6 @@ const LandingPage: React.FC = () => {
             </Button>
           </motion.div>
 
-          {/* Stats Section */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -177,7 +189,7 @@ const LandingPage: React.FC = () => {
             viewport={{ once: true }}
             className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
           >
-            {stats.map((stat, index) => (
+            {stats.map((stat) => (
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
@@ -214,7 +226,6 @@ const LandingPage: React.FC = () => {
       {/* Features Section */}
       <section id="features" className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -230,7 +241,6 @@ const LandingPage: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* Features Grid */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -259,7 +269,6 @@ const LandingPage: React.FC = () => {
       {/* Why Choose PPFAS Section */}
       <section id="why-ppfas" className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -274,7 +283,6 @@ const LandingPage: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* Benefits Grid */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -355,17 +363,9 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   )
 }
-
-// Check Icon Component
-const CheckIcon = (props: any) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
-    <polyline points="20 6 9 17 4 12" />
-  </svg>
-)
 
 export default LandingPage

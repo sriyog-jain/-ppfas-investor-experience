@@ -24,17 +24,14 @@ const AuroraBackground: React.FC = () => {
     const animate = () => {
       time += 0.001
 
-      // Clear canvas
       ctx.fillStyle = '#0F0F0F'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // Create gradient
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
 
-      // Aurora colors - emerald and purple
-      const hue1 = Math.sin(time) * 30 + 160 // Emerald range
-      const hue2 = Math.sin(time + Math.PI / 3) * 30 + 260 // Purple range
-      const hue3 = Math.sin(time + (2 * Math.PI) / 3) * 30 + 120 // Green range
+      const hue1 = Math.sin(time) * 30 + 160
+      const hue2 = Math.sin(time + Math.PI / 3) * 30 + 260
+      const hue3 = Math.sin(time + (2 * Math.PI) / 3) * 30 + 120
 
       gradient.addColorStop(0, `hsla(${hue1}, 100%, 30%, 0.3)`)
       gradient.addColorStop(0.5, `hsla(${hue2}, 100%, 25%, 0.2)`)
@@ -43,8 +40,7 @@ const AuroraBackground: React.FC = () => {
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // Add some noise/texture
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 5; i += 1) {
         const noiseGradient = ctx.createRadialGradient(
           Math.sin(time + i) * canvas.width,
           Math.cos(time + i) * canvas.height,
