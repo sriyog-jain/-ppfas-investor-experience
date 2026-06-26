@@ -37,7 +37,7 @@ const GlassCard: React.FC<GlassCardProps> = ({
         ${hoverEffect ? 'cursor-pointer hover-scale' : ''}
         ${className}
       `}
-      {...rest}
+      {...(rest as any)}
     >
       {children}
     </motion.div>

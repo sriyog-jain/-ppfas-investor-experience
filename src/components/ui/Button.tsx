@@ -9,10 +9,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   variant?: ButtonVariant
   size?: ButtonSize
-  onClick?: () => void
   className?: string
   disabled?: boolean
-  type?: ButtonType
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -41,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <motion.button
-      type={type}
+      type={type as ButtonType}
       onClick={onClick}
       disabled={disabled}
       whileHover={{ scale: disabled ? 1 : 1.05 }}
@@ -53,7 +51,7 @@ const Button: React.FC<ButtonProps> = ({
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         ${className}
       `}
-      {...rest}
+      {...(rest as any)}
     >
       {children}
     </motion.button>
